@@ -1,5 +1,6 @@
 <div align="center">
-  <h1>🛑 deslop</h1>
+  <img src="./assets/logo.jpg" width="200" alt="deslop logo" style="border-radius: 20px; margin-bottom: 20px;" />
+  <h1>deslop</h1>
   <p><b>The Anti-Slop Engine for AI-generated code.</b></p>
 </div>
 
