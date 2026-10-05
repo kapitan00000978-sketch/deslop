@@ -19,6 +19,7 @@
     "typescript": "^7.0.2"
   },
   "bin": {
-    "deslop": "./dist/index.js"
-  }
+    "deslop": "./dist/cli.js"
+  },
+  "types": "dist/index.d.ts"
 }
