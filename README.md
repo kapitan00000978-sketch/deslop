@@ -8,27 +8,37 @@ AI is amazing at writing code fast, but left unchecked, it produces "slop" — h
 
 **`deslop`** is a lightweight, zero-dependency engine that strictly enforces high-end, Awwwards-winning architecture (GSAP, Three.js, clean Tailwind) on AI outputs.
 
-## 🚀 Quick Start (via GitHub)
-Since `deslop` is an open-source GitHub tool, you can run it directly from your terminal using `npx` without needing to install anything locally.
+---
 
-## The 3-Step Workflow
+## 💿 Global Installation (Windows, macOS, Linux)
+Install `deslop` globally on your system to use the CLI from anywhere without having to type out the GitHub URL every time.
+
+```bash
+# Install globally via npm (works on OS X, Linux, and Windows)
+npm install -g github:kapitan00000978-sketch/deslop
+```
+*(Now you can just type `deslop` instead of `npx github:...`!)*
+
+---
+
+## 🚀 The 3-Step Workflow
 
 ### Step 1: Protect your IDE (`init`)
 Run this in any project to generate a strict rules file (`.cursorrules`, `.windsurfrules`, etc.). This acts as a strict firewall, telling IDE AIs to stop generating cheap templates and start writing premium UI code.
 
 ```bash
 # Default (Cursor)
-npx github:kapitan00000978-sketch/deslop init
+deslop init
 
 # Specify Agent and Stack
-npx github:kapitan00000978-sketch/deslop init --agent windsurf --stack framer-motion
+deslop init --agent windsurf --stack framer-motion
 ```
 
 ### Step 2: The Prompt Dictator (`prompt`)
 Building your own AI Agent? Wrap the user's prompt into our dictatorial system prompt to enforce premium quality at the API level.
 
 ```bash
-npx github:kapitan00000978-sketch/deslop prompt "create a portfolio website"
+deslop prompt "create a portfolio website"
 ```
 
 ### Step 3: Real-time Slop Interceptor (`pipe`)
@@ -36,12 +46,13 @@ AI still messed up? Pipe the streaming output directly through `deslop` to fix b
 
 ```bash
 # Stream your AI output through deslop
-node run-my-ai.js | npx github:kapitan00000978-sketch/deslop pipe > result.tsx
+node run-my-ai.js | deslop pipe > result.tsx
 ```
 
-## 📦 Usage as a Module
+---
 
-You can seamlessly install and import `deslop` directly from GitHub into your own AI projects:
+## 📦 Usage as a NodeJS Module
+Building an AI app? You can seamlessly install and import `deslop` directly from GitHub into your own AI projects:
 
 ```bash
 npm install github:kapitan00000978-sketch/deslop
