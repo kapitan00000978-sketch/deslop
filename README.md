@@ -5,44 +5,48 @@
 
 AI is amazing at writing code fast, but left unchecked, it produces "slop" — hardcoded hex colors, lazy placeholders, and boring 2010s-era Bootstrap templates. 
 
-**`deslop`** fixes AI in two ways:
-1. **Pre-Processing (Prompt Dictator):** Forces the AI to generate high-end, Awwwards-winning code (Three.js, GSAP, Spline, Lenis) instead of cheap generic templates.
-2. **Post-Processing (Real-time Stream Interceptor):** Cleans up bad Tailwind, removes inline styles, and intercepts `// TODO` lazy blocks with zero extra token costs.
+**`deslop`** is a lightweight, zero-dependency engine that strictly enforces high-end, Awwwards-winning architecture (GSAP, Three.js, clean Tailwind) on AI outputs.
 
-## 🚀 Quick Start
+## 🚀 The 3-Step Workflow
 
-### 1. Pre-Processing (Force Premium Quality)
-Wrap your user's prompt into a draconian system instruction that forces the AI to be a top-tier frontend architect.
+### Step 1: Protect your IDE (`init`)
+Run this in any project to generate a `.cursorrules` file. This acts as a strict firewall, telling IDE AIs (like Cursor or Copilot) to stop generating cheap templates and start writing premium UI code.
 
 ```bash
-# Compile a basic request into an elite strict prompt
+npx deslop init
+```
+*Creates `.cursorrules` instructing the AI to use GSAP, avoid placeholders (`// TODO`), and write clean semantic HTML.*
+
+### Step 2: The Prompt Dictator (`prompt`)
+Building your own AI Agent? Wrap the user's prompt into our dictatorial system prompt to enforce premium quality at the API level.
+
+```bash
 npx deslop prompt "create a portfolio website"
 ```
-*Output will inject strict rules mandating GSAP, Three.js, Codrops-style micro-interactions, and smooth scrolling.*
 
-### 2. Post-Processing (Fix AI output in real-time)
-If you are streaming AI output, pipe it directly through `deslop` to fix it in memory before it even reaches the file system!
+### Step 3: Real-time Slop Interceptor (`pipe`)
+AI still messed up? Pipe the streaming output directly through `deslop` to fix bad Tailwind classes and remove lazy slop in real-time. Costs 0 extra API tokens.
 
 ```bash
-# Example: Stream your AI script through deslop
+# Stream your AI output through deslop
 node run-my-ai.js | npx deslop pipe > result.tsx
 ```
 
-## 📦 Using as a Library in your AI Agent
+## 📦 Usage as an NPM Library
 
-You can use `deslop` inside your own AI tool or Node.js backend.
+You can seamlessly import `deslop` into your own AI projects:
 
 ```typescript
-import { buildStrictPrompt, deslop, DeslopStream } from 'deslop';
+import { buildStrictPrompt, deslop, DeslopStream } from 'deslop-ai';
 
 // 1. Force the AI to write high-end code
-const prompt = buildStrictPrompt("Menga 3D portfolio sayt kerak");
-const aiResponse = await myLLM.generate(prompt);
+const strictPrompt = buildStrictPrompt("Menga 3D portfolio sayt kerak");
+const aiResponse = await myLLM.generate(strictPrompt);
 
-// 2. Clean the resulting code of any remaining "slop"
+// 2. Post-process: clean the resulting code of any remaining "slop"
 const cleanCode = deslop(aiResponse);
 
-// 3. Or use the Stream interceptor (0 extra tokens!)
+// 3. Or use the Stream interceptor (0 extra tokens, 0 delay!)
 process.stdin.pipe(new DeslopStream()).pipe(process.stdout);
 ```
 
