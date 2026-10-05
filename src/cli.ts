@@ -4,14 +4,14 @@ import * as fs from 'fs';
 import * as path from 'path';
 import { deslop, DeslopStream } from './core';
 import { buildStrictPrompt } from './prompt';
-import { CURSOR_RULES_CONTENT } from './rules';
+import { generateRulesContent, StackType, AgentType } from './rules';
 
 const program = new Command();
 
 program
   .name('deslop')
   .description('Anti-Slop Engine CLI')
-  .version('0.5.0');
+  .version('0.6.0');
 
 program
   .command('fix')
@@ -50,16 +50,29 @@ program
 
 program
   .command('init')
-  .description('Initialize .cursorrules in the current project to control IDE AI agents')
-  .action(() => {
-    const rulePath = path.resolve(process.cwd(), '.cursorrules');
+  .description('Initialize AI rules in the current project to control IDE AI agents')
+  .option('--agent <type>', 'Specify the agent type: cursor | windsurf | claude | general', 'cursor')
+  .option('--stack <type>', 'Specify the stack: default | gsap-threejs | framer-motion', 'default')
+  .action((options) => {
+    const agent: AgentType = options.agent as AgentType;
+    const stack: StackType = options.stack as StackType;
+    
+    let filename = '.cursorrules';
+    if (agent === 'windsurf') filename = '.windsurfrules';
+    else if (agent === 'claude') filename = 'CLAUDE.md';
+    else if (agent === 'general') filename = 'AGENTS.md';
+
+    const rulesContent = generateRulesContent(stack);
+    const rulePath = path.resolve(process.cwd(), filename);
+
     if (fs.existsSync(rulePath)) {
-      console.log(`⚠️  .cursorrules already exists. Appending Deslop rules...`);
-      fs.appendFileSync(rulePath, '\n\n' + CURSOR_RULES_CONTENT, 'utf-8');
+      console.log(`⚠️  ${filename} already exists. Appending Deslop rules...`);
+      fs.appendFileSync(rulePath, '\n\n' + rulesContent, 'utf-8');
     } else {
-      fs.writeFileSync(rulePath, CURSOR_RULES_CONTENT.trim(), 'utf-8');
+      fs.writeFileSync(rulePath, rulesContent, 'utf-8');
     }
-    console.log(`✅ Success! Protected this project with Deslop AI rules (.cursorrules).`);
+    
+    console.log(`✅ Success! Protected this project with Deslop rules (${filename}) using stack [${stack}].`);
   });
 
 program.parse();

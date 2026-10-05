@@ -2,6 +2,8 @@ import { Transform } from 'stream';
 
 const tokenMap: Record<string, string> = {
   'bg-[#0a0a0f]': 'bg-surface-primary',
+  'bg-[#ffffff]': 'bg-white',
+  'bg-[#000000]': 'bg-black',
   'text-[#6366f1]': 'text-accent',
   'text-[#9aa3b8]': 'text-secondary',
   'bg-[#22d3ee]': 'bg-accent-glow',
@@ -22,13 +24,17 @@ export function deslop(content: string): string {
       cleaned = cleaned.replaceAll(slop, token);
     }
 
-    // 2. Auto-Fix Inline Styles
-    const styleRegex = /class="([^"]+)"\s*style="margin-top: 20px; letter-spacing: 1px;"/g;
-    cleaned = cleaned.replace(styleRegex, 'class="$1 mt-5 tracking-wide"');
+    // 2. Auto-Remove Lazy TODOs (JavaScript/TypeScript and HTML)
+    cleaned = cleaned.replace(/\/\/\s*TODO:\s*implement later\s*\n?/gi, '');
+    cleaned = cleaned.replace(/\/\/\s*TODO:[^\n]+\n?/gi, '');
+    cleaned = cleaned.replace(/<!--\s*TODO:[^-]+-->\n?/gi, '');
 
-    // 3. Auto-Remove Lazy TODOs
-    const todoRegex = /\s*<!-- \/\/ TODO:[^>]+-->\n?/g;
-    cleaned = cleaned.replace(todoRegex, '');
+    // 3. Remove stray console.logs (dangerous if AI leaves debugging slop)
+    cleaned = cleaned.replace(/console\.log\([^)]+\);\n?/g, '');
+
+    // 4. Auto-Fix basic Inline Styles to Tailwind
+    const styleRegex = /style="margin-top:\s*20px;\s*letter-spacing:\s*1px;"/g;
+    cleaned = cleaned.replace(styleRegex, 'class="mt-5 tracking-wide"');
 
     return cleaned;
 }

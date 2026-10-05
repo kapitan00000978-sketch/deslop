@@ -1,15 +1,26 @@
 {
-  "name": "deslop",
-  "version": "1.0.0",
-  "description": "",
+  "name": "deslop-engine",
+  "version": "0.1.0",
+  "description": "The Anti-Slop Engine for AI-generated code.",
   "main": "dist/index.js",
-  "scripts": {
-    "build": "tsc",
-    "start": "tsx src/index.ts check"
+  "types": "dist/index.d.ts",
+  "bin": {
+    "deslop": "./dist/cli.js"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "scripts": {
+    "build": "tsc"
+  },
+  "keywords": [
+    "ai",
+    "slop",
+    "cursor",
+    "copilot",
+    "windsurf",
+    "claude",
+    "linter"
+  ],
+  "author": "Antigravity",
+  "license": "MIT",
   "dependencies": {
     "commander": "^15.0.0"
   },
@@ -17,9 +28,5 @@
     "@types/node": "^26.6.4",
     "tsx": "^4.23.15",
     "typescript": "^7.0.2"
-  },
-  "bin": {
-    "deslop": "./dist/cli.js"
-  },
-  "types": "dist/index.d.ts"
+  }
 }
