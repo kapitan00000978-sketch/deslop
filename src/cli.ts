@@ -3,13 +3,14 @@ import { Command } from 'commander';
 import * as fs from 'fs';
 import * as path from 'path';
 import { deslop, DeslopStream } from './core';
+import { buildStrictPrompt } from './prompt';
 
 const program = new Command();
 
 program
   .name('deslop')
   .description('Anti-Slop Engine CLI')
-  .version('0.3.0');
+  .version('0.4.0');
 
 program
   .command('fix')
@@ -35,6 +36,15 @@ program
   .description('Real-time Stream Interceptor: Fix AI code as it streams via stdin')
   .action(() => {
     process.stdin.pipe(new DeslopStream()).pipe(process.stdout);
+  });
+
+program
+  .command('prompt')
+  .description('Compile a user request into a strict, Awwwards-level dictatorial prompt')
+  .argument('<request>', 'The user request')
+  .action((request) => {
+    const strictPrompt = buildStrictPrompt(request);
+    console.log(strictPrompt);
   });
 
 program.parse();
