@@ -4,13 +4,14 @@ import * as fs from 'fs';
 import * as path from 'path';
 import { deslop, DeslopStream } from './core';
 import { buildStrictPrompt } from './prompt';
+import { CURSOR_RULES_CONTENT } from './rules';
 
 const program = new Command();
 
 program
   .name('deslop')
   .description('Anti-Slop Engine CLI')
-  .version('0.4.0');
+  .version('0.5.0');
 
 program
   .command('fix')
@@ -45,6 +46,20 @@ program
   .action((request) => {
     const strictPrompt = buildStrictPrompt(request);
     console.log(strictPrompt);
+  });
+
+program
+  .command('init')
+  .description('Initialize .cursorrules in the current project to control IDE AI agents')
+  .action(() => {
+    const rulePath = path.resolve(process.cwd(), '.cursorrules');
+    if (fs.existsSync(rulePath)) {
+      console.log(`⚠️  .cursorrules already exists. Appending Deslop rules...`);
+      fs.appendFileSync(rulePath, '\n\n' + CURSOR_RULES_CONTENT, 'utf-8');
+    } else {
+      fs.writeFileSync(rulePath, CURSOR_RULES_CONTENT.trim(), 'utf-8');
+    }
+    console.log(`✅ Success! Protected this project with Deslop AI rules (.cursorrules).`);
   });
 
 program.parse();

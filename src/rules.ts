@@ -1,0 +1,25 @@
+export const CURSOR_RULES_CONTENT = `
+# Deslop Anti-Slop Policy
+# This project enforces strict Awwwards-level UI standards.
+
+## 1. Zero Placeholders
+- DO NOT use \`// TODO\`, \`// implement later\`, or leave empty functions. 
+- You must write complete, functional code. No lazy shortcuts.
+
+## 2. No Boring Templates
+- NO Bootstrap-style grid systems or dated layouts.
+- Use asymmetrical grids, expansive whitespace, and modern typographic scales.
+
+## 3. Premium Animations
+- React apps: Use \`framer-motion\`.
+- Vanilla/Other: Use \`GSAP\`.
+- Implement smooth scroll (Lenis) if generating a full page.
+
+## 4. Micro-Interactions
+- Add subtle hover states (magnetic buttons, glow effects, or custom cursors).
+- Use glassmorphism or noise textures where appropriate.
+
+## 5. Clean Code
+- Avoid inline styles. Rely on Tailwind (or CSS Modules) entirely.
+- Keep semantic HTML (avoid excessive div wrapping).
+`;
