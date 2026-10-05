@@ -17,14 +17,17 @@ program
   .argument('<file>', 'File to fix')
   .action((filePath) => {
     const fullPath = path.resolve(process.cwd(), filePath);
-    if (!fs.existsSync(fullPath)) console.error(`❌ Error: Not found.`) && process.exit(1);
+    if (!fs.existsSync(fullPath)) {
+      console.error("❌ Error: Not found.");
+      process.exit(1);
+    }
 
-    console.log(`\n🛠️  Fixing slop in ${filePath}...`);
+    console.log(`\n🚀  Fixing slop in ${filePath}...`);
     const content = fs.readFileSync(fullPath, 'utf-8');
     const fixedContent = deslop(content);
 
     fs.writeFileSync(fullPath, fixedContent, 'utf-8');
-    console.log(`✨ Success! File has been desloped.`);
+    console.log(`✅ Success! File has been desloped.`);
   });
 
 program
